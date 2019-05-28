@@ -1,0 +1,29 @@
+{
+    "name": "prismic-vuejs-starter",
+    "version": "1.2.0",
+    "description": "Vue.js starter project with content managed in Prismic",
+    "license": "Apache-2.0",
+    "repository": "github:prismicio/vuejs-starter",
+    "author": "Prismic",
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build && echo '/* /index.html 200' > dist/_redirects"
+    },
+    "dependencies": {
+        "prismic-dom": "^2.1.0",
+        "prismic-vue": "^1.3.0",
+        "vue": "^2.5.16",
+        "vue-prism-component": "^1.1.1",
+        "vue-router": "^3.0.1"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.7.0",
+        "@vue/cli-service": "^3.7.0",
+        "vue-template-compiler": "^2.5.16"
+    },
+    "bit": {
+        "env": {},
+        "componentsDefaultDirectory": "components/{name}",
+        "packageManager": "npm"
+    }
+}
