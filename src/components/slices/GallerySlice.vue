@@ -1,12 +1,19 @@
 <template>
-  <section class='image-gallery'>
+  <section id="core">
     <prismic-rich-text :field="slice.primary.gallery_title"/>
-    <div class="gallery">
-      <div v-for="(item, index) in items" :key="'item-' + index" class="gallery-item">
-        <prismic-image :field="item.image"/>
-        <prismic-rich-text :field="item.caption"/>
-      </div>
-    </div>
+    <dl>
+      <dt v-for="(item, index) in items" :key="'item-' + index">
+        <a :href="'#item-' + index">
+          <prismic-image :field="item.image.thumbnail"/>
+        </a>
+        <dd :id="'item-' + index">
+          <a href="#core">
+            <prismic-image :field="item.image"/>
+            <prismic-rich-text class="caption" :field="item.caption"/>
+          </a>
+        </dd>
+      </dt>
+    </dl>
   </section>
 </template>
 
@@ -26,35 +33,53 @@ export default {
 </script>
 
 <style scoped>
-.gallery {
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+@keyframes photopresent { 
+	0% { width: 0;  height: 0; opacity: 0;  }
+	30% { height: 0; opacity: 0;  }
+	60% { height: 600px; opacity: 0; margin: 20px; }
+	100% { height: 600px; opacity: 1; margin: 20px; }
+}
+#core{
+  margin: 25px 0 50px 0;
+}
+dd a { 
+  background: #fff; display: inline-block;
+  transition: 4s box-shadow ease-in;
+}
+dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+dd { 
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
+  visibility: hidden; 
   display: flex;
-  -webkit-flex-wrap: wrap;
-   flex-wrap: wrap;
-  -webkit-justify-content: space-between; 
-  justify-content: space-between; 
+  align-items: center;
+  justify-content: center;
+  max-height: -webkit-fill-available;
 }
-.gallery-item {
-  -webkit-box-flex: 0 1 48%;
-  -moz-box-flex:  0 1 48%;
-  -webkit-flex:  0 1 48%;
-  -ms-flex:  0 1 48%;
-  flex: 0 1 48%;
+dd:target {
+  visibility: visible;
+  background: rgba(0,0,0,0.6);
+  transition: .35s background linear;
 }
-.gallery-link {
-  margin-top: -20px;
-  text-transform: uppercase;
+dd:target a { 
+  box-shadow: 0 0 8px 8px rgba(0,0,0,0.3); 
 }
-/* Media Queries */
-@media (max-width: 767px) {
-  .gallery-item {
-    -webkit-box-flex: 100%;
-    -moz-box-flex:  100%;
-    -webkit-flex:  100%;
-    -ms-flex:  100%;
-    flex: 100%;
-  }
+dd:target a img { 
+	animation: photopresent 3s forwards;
+}
+#core:target dl dd { 
+  background: rgba(0,0,0,0); 
+  transition: 1.5s background ease-out; 
+}
+.caption{
+  text-align: center;
+  margin: 0 50px 0 50px;
 }
 </style>

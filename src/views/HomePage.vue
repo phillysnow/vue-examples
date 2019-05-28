@@ -2,9 +2,9 @@
   <section class="homepage">
     <!-- Template for page title. -->
     <div class="container">
-      <h2 class="title">
-        {{ $prismic.richTextAsPlain(title) }}
-      </h2>
+      <p class="text">
+        {{ $prismic.richTextAsPlain(text) }}
+      </p>
     </div>
     <examples-grid/>
   </section>
@@ -21,7 +21,7 @@ export default {
   },
   data () {
     return {
-      title: null,
+      text: null,
     }
   },
   methods: {
@@ -30,7 +30,7 @@ export default {
       this.$prismic.client.getSingle('homepage')
         .then((document) => {
           if (document) {
-            this.title = document.data.title;
+            this.text = document.data.text;
 
           } else {
             //returns error page
