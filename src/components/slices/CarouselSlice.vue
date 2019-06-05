@@ -1,5 +1,5 @@
 <template>
-  <div class='container carousel'>
+  <div class='carousel'>
     <transition-group name='fade' tag='div'>
       <div v-for="number in [currentNumber]" :key='number'>
         <div 

@@ -1,23 +1,31 @@
 <template>
   <div class="content-section">
-    <prismic-link class="button" :field="slice.primary.button_link">
+    <a :href="link.url" class="button" :download="slice.primary.file_name">
       {{ slice.primary.button_text }}
-    </prismic-link>
+    </a>
   </div>
 </template>
 
 <script>
 export default {
   props: ['slice'],
-  name: 'button-slice'
+  name: 'download-button',
+  data: function() {
+    return {
+      link: ''
+    }
+  },
+  created () {
+    this.link = this.slice.primary.button_link
+  }
 }
 </script>
 
 
 <style scoped>
 .button {
-  background-color: green;
-  box-shadow: 0 5px 0 grey;
+  background-color: red;
+  box-shadow: 0 5px 0 darkred;
   color: white;
   padding: 1em 1.5em;
   position: relative;
@@ -26,7 +34,7 @@ export default {
 }
 
 .button:hover {
-  background-color: greenyellow;
+  background-color: #ce0606;
   cursor: pointer;
 }
 

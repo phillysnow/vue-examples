@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <section>
         <!-- Slice section template -->
         <section v-for="(slice, index) in slices" :key="'slice-' + index">
             <!-- Slider slice component -->
@@ -22,12 +22,24 @@
             <template v-else-if="slice.slice_type === 'button'">
                 <button-slice :slice="slice"/>
             </template>
+            <!-- Download Button slice component -->
+            <template v-else-if="slice.slice_type === 'download_button'">
+                <download-button :slice="slice"/>
+            </template>
             <!-- Code slice component -->
             <template v-else-if="slice.slice_type === 'code_snippet'">
                 <code-slice :slice="slice"/>
             </template>
+            <!-- Info slice component -->
+            <template v-else-if="slice.slice_type === 'more_info'">
+                <info-slice :slice="slice"/>
+            </template>
+            <!-- Embed slice component -->
+            <template v-else-if="slice.slice_type === 'embed'">
+                <embed-slice :slice="slice"/>
+            </template>
         </section>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -37,7 +49,10 @@ const QuoteSlice = () => import("../components/slices/QuoteSlice.vue");
 const GallerySlice = () => import("../components/slices/GallerySlice.vue");
 const TextSlice = () => import("../components/slices/TextSlice.vue");
 const ButtonSlice = () => import("../components/slices/ButtonSlice.vue");
+const DownloadButton = () => import("../components/slices/DownloadButton.vue");
 const CodeSlice = () => import("../components/slices/CodeSlice.vue");
+const InfoSlice = () => import("../components/slices/InfoSlice.vue");
+const EmbedSlice = () => import("../components/slices/EmbedSlice.vue");
 
 export default {
   props: ['slices'],
@@ -48,7 +63,10 @@ export default {
     GallerySlice,
     TextSlice,
     ButtonSlice,
-    CodeSlice
+    DownloadButton,
+    CodeSlice,
+    InfoSlice,
+    EmbedSlice
   },
 }
 </script>

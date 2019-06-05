@@ -82,7 +82,7 @@ img {
 
 /* General */
 .container, header, footer {
-  max-width: 980px;
+  max-width: 90%;
   margin: auto;
 }
 .content-section {
